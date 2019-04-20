@@ -4,11 +4,11 @@ import Smurf from "./Smurf";
 
 const SmurfList = props => {
   return (
-    <ul>
+    <div>
       {props.smurfs.map(smurf => {
         return <Smurf key={smurf.id} smurf={smurf} />;
       })}
-    </ul>
+    </div>
   );
 };
 

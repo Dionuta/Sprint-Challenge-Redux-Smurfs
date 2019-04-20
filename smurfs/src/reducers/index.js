@@ -1,47 +1,51 @@
 import {
   FETCH_START,
   FETCH_SUCCESS,
-  FETCH_FAILURE
-} from './../actions'
-
+  FETCH_FAILURE,
+  ADD_SMURF
+} from "./../actions";
 
 /*
   Be sure to import in all of the action types from `../actions`
 */
 
-
 //  Your initial/default state for this project could *Although does not have to* look a lot like this
 const initialState = {
-   smurfs: [],
-   isLoading: false,
-   error: null
- };
+  smurfs: [],
+  isLoading: false,
+  error: null
+};
 
-
- export const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_START:
-    return {
-       ...state,
-        error: '',
-        isLoading: true,
-    }
-    case FETCH_SUCCESS: 
       return {
-       ...state,
-       isLoading: false,
-       smurfs: action.payload
-      }
-      case FETCH_FAILURE: 
-         return {
-           ...state,
-           isLoading: false,
-           error: action.payload
-         }
+        ...state,
+        error: "",
+        isLoading: true
+      };
+    case FETCH_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        smurfs: action.payload
+      };
+    case FETCH_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+    case ADD_SMURF:
+      return Object.assign({}, state, {
+        isLoading: false,
+        error: "",
+        smurfs: action.smurfs
+      });
     default:
-    return state;
- }
-}
+      return state;
+  }
+};
 
 /*
   You'll only need one smurf reducer for this project.
