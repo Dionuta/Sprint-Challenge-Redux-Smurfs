@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import SmurfList from "./../components/SmurfList";
 
-import { getSmurf, addSmurf } from "../actions/index";
+import { getSmurf, addSmurf, deleteItem } from "../actions/index";
 
 import Loader from "react-loader-spinner";
 
@@ -15,6 +15,7 @@ class SmurfListView extends React.Component {
       name: "",
       age: "",
       height: "",
+      
     
   };
 
@@ -40,7 +41,7 @@ class SmurfListView extends React.Component {
         {fetching && <Loader type="Puff" color="red" height={80} width={80} />}
         {error && <div>Error! {error.message}</div>}
         <div className="SmurfsList_wrapper">
-          <SmurfList smurfs={smurfs} />
+          <SmurfList smurfs={smurfs} deleteItem={deleteItem} />
         </div>
         <form onSubmit={this.addSmurf}>
           <input
@@ -78,5 +79,5 @@ const mapStateToProps = state => ({
 // the characters and the fetching boolean
 export default connect(
   mapStateToProps,
-  { getSmurf, addSmurf }
+  { getSmurf, addSmurf,deleteItem }
 )(SmurfListView);

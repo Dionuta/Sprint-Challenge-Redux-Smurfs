@@ -2,7 +2,8 @@ import {
   FETCH_START,
   FETCH_SUCCESS,
   FETCH_FAILURE,
-  ADD_SMURF
+  ADD_SMURF,
+  DELETE_SMURF
 } from "./../actions";
 
 /*
@@ -37,6 +38,12 @@ export const reducer = (state = initialState, action) => {
         error: action.payload
       };
     case ADD_SMURF:
+      return Object.assign({}, state, {
+        isLoading: false,
+        error: "",
+        smurfs: action.smurfs
+      });
+    case DELETE_SMURF:
       return Object.assign({}, state, {
         isLoading: false,
         error: "",

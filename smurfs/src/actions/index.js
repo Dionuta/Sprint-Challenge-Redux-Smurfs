@@ -45,3 +45,18 @@ export const addSmurf = (newSmurf) => dispatch => {
               dispatch({type: FETCH_FAILURE, error: 'Trouble adding Smurf'})
           })
   }
+
+export const DELETE_SMURF = 'DELETE_SMURF';
+
+
+ export const deleteItem = (id) => dispatch => {
+  dispatch({type: FETCH_START})
+    axios
+        .delete(`http://localhost:5000/friends/${id}`)
+        .then(response => {
+          dispatch({type: DELETE_SMURF, smurfs: response.data})
+        })
+        .catch(error => {
+          dispatch({type: FETCH_FAILURE, error: 'Trouble adding Smurf'})
+      })
+}
