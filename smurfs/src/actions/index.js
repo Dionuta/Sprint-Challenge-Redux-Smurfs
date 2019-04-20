@@ -13,3 +13,50 @@
    U - updateSmurf
    D - deleteSmurf
 */
+
+
+import axios from 'axios';
+
+
+export const FETCH_START = 'FETCH_START';
+export const FETCH_SUCCESS = 'FETCH_SUCCESS';
+export const FETCH_FAILURE= 'FETCH_FAILURE';
+
+
+export const getSmurf = () => dispatch => {
+  dispatch({type: FETCH_START});
+  axios 
+    .get('http://localhost:3333/smurfs')
+    .then(res => dispatch({ type: FETCH_SUCCESS, payload: res.data }))
+    
+    .catch(err => dispatch({ type: FETCH_FAILURE, payload: err }));
+}
+
+
+export const ADD_SMURF = "ADD_SMURF";
+
+export const addSmurf = (newSmurf) => dispatch => {
+      dispatch({type: FETCH_START})
+      axios.post('http://localhost:3333/smurfs', newSmurf)
+          .then(response => {
+              dispatch({type: ADD_SMURF, smurfs: response.data})
+          })
+          .catch(error => {
+              dispatch({type: FETCH_FAILURE, error: 'Trouble adding Smurf'})
+          })
+  }
+
+export const DELETE_SMURF = 'DELETE_SMURF';
+
+
+ export const deleteItem = (id) => dispatch => {
+  dispatch({type: FETCH_START})
+    axios
+        .delete(`http://localhost:5000/friends/${id}`)
+        .then(response => {
+          dispatch({type: DELETE_SMURF, smurfs: response.data})
+        })
+        .catch(error => {
+          dispatch({type: FETCH_FAILURE, error: 'Trouble adding Smurf'})
+      })
+}
